@@ -14,30 +14,42 @@ Creating Leather Craft adalah aplikasi e-commerce berbasis web yang menampilkan 
 * **Topik Project:** Sistem Informasi E-Commerce Kerajinan Kulit
 
 ---
+Siap 👍 aku rapikan dan **tambahkan deskripsi singkat setelah Identitas Mahasiswa**, lalu **langsung masuk ke bagian Sumber Data (Public API)** dengan bahasa formal-akademik yang rapi dan siap dikumpulkan.
 
-## 🎯 Tujuan Project
+Berikut versi **hasil revisinya** (tinggal tempel):
 
-Project *Creating Leather Craft – E-Commerce System* dikembangkan untuk memenuhi **rubrik penilaian mata kuliah Pemrograman Berbasis Web**, dengan capaian sebagai berikut:
+---
 
-### Kesesuaian dengan Rubrik Penilaian
+## 👤 Identitas Mahasiswa
 
-* **Analisis Kebutuhan Sistem**
-  Sistem dirancang berdasarkan kebutuhan dua aktor utama (User & Admin) dengan fungsi yang jelas dan terpisah.
+* **Nama:** Sena Marlina
+* **NIM:** 2307017
+* **Mata Kuliah:** Pemrograman Berbasis Web
+* **Topik Project:** Sistem Informasi E-Commerce Kerajinan Kulit
 
-* **Implementasi CRUD (Create, Read, Update, Delete)**
-  CRUD diterapkan pada data produk, pesanan, dan laporan menggunakan Laravel dan MySQL.
+**Deskripsi Singkat Proyek**
+Project *Creating Leather Craft – E-Commerce System* merupakan aplikasi e-commerce berbasis web yang dikembangkan untuk mendukung proses penjualan dan pengelolaan produk kerajinan kulit khas Garut. Sistem ini dirancang untuk membantu pelaku usaha dalam mengelola data produk, pemesanan, transaksi, serta laporan keuangan secara terstruktur dan terintegrasi, sekaligus memberikan pengalaman belanja yang mudah dan nyaman bagi pengguna.
 
-* **Integrasi Database**
-  Menggunakan MySQL dengan migration & seeding untuk memastikan struktur data konsisten dan terkontrol.
+---
 
-* **Autentikasi & Otorisasi**
-  Login dan register user, serta pembatasan akses fitur admin.
+##  Sumber Data (Public API)
 
-* **User Interface & User Experience (UI/UX)**
-  Antarmuka dirancang responsif, konsisten, dan mudah dipahami oleh pengguna awam.
+Pada pengembangan aplikasi **Creating Leather Craft – E-Commerce System**, sistem **tidak menggunakan Public API (Free Public API)**.
 
-* **Dokumentasi Project**
-  README ini disusun lengkap mencakup tujuan, fitur, instalasi, hingga dokumentasi tampilan.
+Seluruh data yang digunakan dalam aplikasi bersumber dari **database lokal MySQL** yang dikelola secara mandiri menggunakan framework **Laravel**, melalui proses **migration** dan **database seeding**.
+
+Adapun data yang dikelola dalam sistem meliputi:
+
+* Data produk kerajinan kulit
+* Data pengguna (user dan admin)
+* Data pemesanan dan transaksi
+* Data laporan keuangan
+
+Pendekatan ini dipilih dengan pertimbangan:
+
+* Memberikan kontrol penuh terhadap pengelolaan dan keamanan data
+* Mendukung penerapan fungsi **CRUD (Create, Read, Update, Delete)** secara menyeluruh
+* Menyesuaikan dengan kebutuhan pembelajaran pada mata kuliah **Pemrograman Berbasis Web**
 
 ---
 
@@ -84,7 +96,7 @@ Pastikan perangkat telah terpasang:
 
 * PHP **>= 8.1**
 * Composer
-* MySQL (Laragon / XAMPP)
+* MySQL (Larago)
 
 ---
 
