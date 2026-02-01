@@ -199,6 +199,9 @@ http://127.0.0.1:8000
 ---
 
 ### B. Antarmuka Admin
+### Dashboard Admin
+<img width="1366" height="620" alt="dashboard" src="https://github.com/user-attachments/assets/01acf3f2-77aa-41c0-a195-05e8c6f55d41" />
+
 
 #### Manajemen Produk
 
