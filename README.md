@@ -107,24 +107,18 @@ Halaman utama dan proses belanja pelanggan:
 * **Halaman Produk:** `![Produk](public/img/halaman-produk-user.png)`
 * **Keranjang Belanja:** `![Keranjang](public/img/keranjang-belanja.png)`
 * **Proses Checkout:** `![Checkout](public/img/halaman-checkout.png)`
-
-#### 2. Fitur Akun & Pelacakan
-
-Fitur untuk memantau pesanan dan komunikasi:
-
-* **Dashboard User:** `![Dashboard](public/img/halaman-dashboard-user.png)`
-* **Halaman Profil:** `![Profil](public/img/halaman-akun-user.png)`
-* **Cek Resi Pengiriman:** `![Cek Resi](public/img/halaman-cek-resi.png)`
-* **Fitur Chat:** `![Chat](public/img/halaman-chat.png)`
 * **Detail Pesanan:** `![Detail Pesanan](public/img/halaman-detail-pesanan.png)`
-
-#### 3. Manajemen Admin & Keamanan
-
-Halaman pengelola dan akses masuk:
-
-* **Halaman Login:** `![Login](public/img/login.png)`
-* **Manajemen Produk (Admin):** `![Admin Produk](public/img/manajemenproduk.png)`
-* **Laporan Keuangan:** `![Laporan](public/img/laporan-keuangan.png)`
+* **Cek Resi:** `![Cek Resi](public/img/halaman-cek-resi.png)`
+* **Halaman Chat:** `![Chat](public/img/halaman-chat.png)`
+* **Akun User:** `![Akun User](public/img/halaman-akun-user.png)`
 
 ---
 
+### 🛠️ Bagian Admin / Manajemen (Opsional)
+
+Jika Anda ingin menambahkan bagian manajemen yang ada di folder tersebut:
+
+* **Manajemen Produk:** `![Manajemen Produk](public/img/manajemenproduk.png)`
+* **Manajemen Pesanan:** `![Manajemen Pesanan](public/img/halaman-manajemen-pemesanan.png)`
+* **Laporan Keuangan:** `![Laporan Keuangan](public/img/laporan-keuangan.png)`
+* **Konfirmasi Pesanan:** `![Konfirmasi](public/img/komfirmasi-pesanan.png)`
