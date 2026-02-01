@@ -116,7 +116,6 @@ Halaman utama dan proses belanja pelanggan:
 
 ### 🛠️ Bagian Admin / Manajemen (Opsional)
 
-Jika Anda ingin menambahkan bagian manajemen yang ada di folder tersebut:
 
 * **Manajemen Produk:** `![Manajemen Produk](public/img/manajemenproduk.png)`
 * **Manajemen Pesanan:** `![Manajemen Pesanan](public/img/halaman-manajemen-pemesanan.png)`
