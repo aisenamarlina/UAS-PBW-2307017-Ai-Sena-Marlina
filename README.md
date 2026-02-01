@@ -1,9 +1,9 @@
-# 👜 Creating Leather Craft – E-Commerce System 
+---
+
+# 👜 Creating Leather Craft – E-Commerce System
 
 **Kerajinan Kulit Asli Garut Handmade**
 
-Creating Leather Craft adalah aplikasi e-commerce berbasis web yang menampilkan dan mengelola penjualan produk kerajinan kulit premium khas Garut. Project ini dikembangkan sebagai **Fullstack Web Application** dengan fokus pada manajemen produk, transaksi pemesanan, serta pengalaman pengguna (UI/UX) yang modern dan responsif.
-
 ---
 
 ## 👤 Identitas Mahasiswa
@@ -14,68 +14,69 @@ Creating Leather Craft adalah aplikasi e-commerce berbasis web yang menampilkan 
 * **Topik Project:** Sistem Informasi E-Commerce Kerajinan Kulit
 
 ---
-Siap 👍 aku rapikan dan **tambahkan deskripsi singkat setelah Identitas Mahasiswa**, lalu **langsung masuk ke bagian Sumber Data (Public API)** dengan bahasa formal-akademik yang rapi dan siap dikumpulkan.
 
-Berikut versi **hasil revisinya** (tinggal tempel):
+## 📝 Deskripsi Aplikasi
 
----
+**Creating Leather Craft – E-Commerce System** merupakan aplikasi e-commerce berbasis web yang dirancang untuk menampilkan, mengelola, dan memproses penjualan produk kerajinan kulit khas Garut. Aplikasi ini dikembangkan sebagai project pembelajaran pada mata kuliah Pemrograman Berbasis Web dengan menerapkan konsep **fullstack development**, mulai dari pengelolaan database, backend, hingga antarmuka pengguna (UI/UX).
 
-## 👤 Identitas Mahasiswa
-
-* **Nama:** Sena Marlina
-* **NIM:** 2307017
-* **Mata Kuliah:** Pemrograman Berbasis Web
-* **Topik Project:** Sistem Informasi E-Commerce Kerajinan Kulit
-
-**Deskripsi Singkat Proyek**
-Project *Creating Leather Craft – E-Commerce System* merupakan aplikasi e-commerce berbasis web yang dikembangkan untuk mendukung proses penjualan dan pengelolaan produk kerajinan kulit khas Garut. Sistem ini dirancang untuk membantu pelaku usaha dalam mengelola data produk, pemesanan, transaksi, serta laporan keuangan secara terstruktur dan terintegrasi, sekaligus memberikan pengalaman belanja yang mudah dan nyaman bagi pengguna.
+Sistem ini mendukung dua peran utama, yaitu **user (pelanggan)** dan **admin**, yang masing-masing memiliki hak akses dan fitur berbeda untuk menunjang proses transaksi dan manajemen produk secara terintegrasi.
 
 ---
 
-##  Sumber Data (Public API)
+## 👥 Pihak yang Terlibat
 
-Pada pengembangan aplikasi **Creating Leather Craft – E-Commerce System**, sistem **tidak menggunakan Public API (Free Public API)**.
+* **Sena Marlina** – Mahasiswa / Fullstack Developer
+  Bertanggung jawab atas analisis sistem, perancangan UI/UX, pengembangan backend dan frontend, pengelolaan database, serta dokumentasi aplikasi.
 
-Seluruh data yang digunakan dalam aplikasi bersumber dari **database lokal MySQL** yang dikelola secara mandiri menggunakan framework **Laravel**, melalui proses **migration** dan **database seeding**.
+* **Dosen Pengampu Mata Kuliah** – Pembimbing Akademik
+  Memberikan arahan, evaluasi, dan penilaian terhadap pengembangan project.
 
-Adapun data yang dikelola dalam sistem meliputi:
+---
+
+## 📊 Sumber Data (Public API)
+
+Pada pengembangan aplikasi **Creating Leather Craft – E-Commerce System**, **tidak menggunakan Public API (Free Public API)**.
+
+Seluruh data bersumber dari **database lokal MySQL** yang dikelola secara mandiri menggunakan fitur **migration** dan **seeding** pada framework Laravel.
+
+Data yang digunakan meliputi:
 
 * Data produk kerajinan kulit
 * Data pengguna (user dan admin)
 * Data pemesanan dan transaksi
 * Data laporan keuangan
 
-Pendekatan ini dipilih dengan pertimbangan:
+Pendekatan ini dipilih untuk:
 
-* Memberikan kontrol penuh terhadap pengelolaan dan keamanan data
-* Mendukung penerapan fungsi **CRUD (Create, Read, Update, Delete)** secara menyeluruh
-* Menyesuaikan dengan kebutuhan pembelajaran pada mata kuliah **Pemrograman Berbasis Web**
+* Memberikan kontrol penuh terhadap data
+* Mendukung implementasi CRUD secara menyeluruh
+* Menyesuaikan kebutuhan pembelajaran Pemrograman Berbasis Web
 
 ---
 
-## 🚀 Fitur Utama
+## 🚀 Fitur-Fitur Aplikasi
 
-### 👤 Sisi User (Pelanggan)
+### 👤 Fitur User (Pelanggan)
 
-* Registrasi & Login pengguna
-* Katalog produk kerajinan kulit
-* Keranjang belanja (Shopping Cart)
-* Proses checkout pemesanan
-* Detail dan riwayat pesanan
-* Cek resi pengiriman
-* Sistem **Loyalty Points** untuk pengguna
+* Registrasi dan login pengguna
+* Melihat katalog produk kerajinan kulit
+* Menambahkan produk ke keranjang belanja
+* Proses checkout dan pemesanan
+* Melihat detail dan riwayat pesanan
+* Cek status pengiriman (resi)
+* Sistem **Loyalty Points**
 
-### 🛠️ Sisi Admin
+### 🛠️ Fitur Admin
 
 * Manajemen produk (Create, Read, Update, Delete)
-* Manajemen pemesanan pelanggan
-* Konfirmasi status pesanan
-* Laporan keuangan
-* Monitoring stok produk secara real-time
+* Manajemen pesanan pelanggan
+* Konfirmasi dan update status pesanan
+* Monitoring stok produk
+* Laporan keuangan penjualan
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Teknologi yang Digunakan
 
 | Bagian      | Teknologi                         |
 | ----------- | --------------------------------- |
@@ -88,15 +89,16 @@ Pendekatan ini dipilih dengan pertimbangan:
 
 ---
 
-## 📋 Langkah Instalasi & Menjalankan Project
+## ⚙️ Langkah Instalasi & Menjalankan Project
 
 ### 1️⃣ Persiapan Environment
 
-Pastikan perangkat telah terpasang:
+Pastikan perangkat telah terinstal:
 
 * PHP **>= 8.1**
 * Composer
-* MySQL (Larago)
+* MySQL
+* Laragon / XAMPP
 
 ---
 
@@ -111,7 +113,7 @@ composer dump-autoload
 
 ### 3️⃣ Konfigurasi Database
 
-Buat database baru melalui phpMyAdmin dengan nama:
+Buat database baru dengan nama:
 
 ```text
 leathercraft
@@ -150,6 +152,9 @@ Akses aplikasi melalui browser:
 ```text
 http://127.0.0.1:8000
 ```
+
+---
+
 
 ---
 
