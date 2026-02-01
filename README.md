@@ -97,14 +97,20 @@ Proses migrasi database dan manajemen file di dalam VS Code terminal.
 
 ## 📸 Tangkapan Layar Aplikasi
 
+## 📷 Tangkapan Layar Aplikasi
+
 ### 1. Manajemen Produk (Panel Admin)
 Halaman ini digunakan oleh admin untuk mengelola inventaris kerajinan kulit.
-![Manajemen Produk](public/img/Screenshots/admin_manajemen.png)
+![Manajemen Produk](public/img/manajemenproduk.png)
 
 ### 2. Proses Checkout (User)
 Tampilan formulir pengiriman dan metode pembayaran COD untuk pelanggan.
-![Halaman Checkout](public/img/Screenshots/checkout_user.png)
+![Halaman Checkout](public/img/halaman-checkout.png)
 
-### 3. Lingkungan Pengembangan
-Proses migrasi database dan struktur file di dalam VS Code.
-![Terminal VS Code](public/img/Screenshots/vscode_terminal.png)
+### 3. Tampilan Utama (Landing Page)
+Antarmuka depan aplikasi saat diakses oleh pengunjung atau calon pembeli.
+![Landing Page](public/img/tampilan-awaln-1.png)
+
+### 4. Lingkungan Pengembangan
+Proses migrasi database dan struktur file di dalam terminal VS Code.
+![Terminal VS Code](public/img/admin.png)
