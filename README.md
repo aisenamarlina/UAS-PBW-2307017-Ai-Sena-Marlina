@@ -1,5 +1,3 @@
----
-
 # 👜 Creating Leather Craft – E-Commerce System
 
 **Kerajinan Kulit Asli Garut Handmade**
