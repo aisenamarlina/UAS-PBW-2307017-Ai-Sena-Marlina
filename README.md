@@ -95,22 +95,36 @@ Proses migrasi database dan manajemen file di dalam VS Code terminal.
 
 ---
 
-## 📸 Tangkapan Layar Aplikasi
 
-## 📷 Tangkapan Layar Aplikasi
+### 📸 Tangkapan Layar Aplikasi
 
-### 1. Manajemen Produk (Panel Admin)
-Halaman ini digunakan oleh admin untuk mengelola inventaris kerajinan kulit.
-![Manajemen Produk](public/img/manajemenproduk.png)
+#### 1. Antarmuka Pengguna (User Interface)
 
-### 2. Proses Checkout (User)
-Tampilan formulir pengiriman dan metode pembayaran COD untuk pelanggan.
-![Halaman Checkout](public/img/halaman-checkout.png)
+Halaman utama dan proses belanja pelanggan:
 
-### 3. Tampilan Utama (Landing Page)
-Antarmuka depan aplikasi saat diakses oleh pengunjung atau calon pembeli.
-![Landing Page](public/img/tampilan-awaln-1.png)
+* **Tampilan Beranda 1:** `![Beranda 1](public/img/tampilan-awaln-1.png)`
+* **Tampilan Beranda 2:** `![Beranda 2](public/img/tampilan-awaln-2.png)`
+* **Halaman Produk:** `![Produk](public/img/halaman-produk-user.png)`
+* **Keranjang Belanja:** `![Keranjang](public/img/keranjang-belanja.png)`
+* **Proses Checkout:** `![Checkout](public/img/halaman-checkout.png)`
 
-### 4. Lingkungan Pengembangan
-Proses migrasi database dan struktur file di dalam terminal VS Code.
-![Terminal VS Code](public/img/admin.png)
+#### 2. Fitur Akun & Pelacakan
+
+Fitur untuk memantau pesanan dan komunikasi:
+
+* **Dashboard User:** `![Dashboard](public/img/halaman-dashboard-user.png)`
+* **Halaman Profil:** `![Profil](public/img/halaman-akun-user.png)`
+* **Cek Resi Pengiriman:** `![Cek Resi](public/img/halaman-cek-resi.png)`
+* **Fitur Chat:** `![Chat](public/img/halaman-chat.png)`
+* **Detail Pesanan:** `![Detail Pesanan](public/img/halaman-detail-pesanan.png)`
+
+#### 3. Manajemen Admin & Keamanan
+
+Halaman pengelola dan akses masuk:
+
+* **Halaman Login:** `![Login](public/img/login.png)`
+* **Manajemen Produk (Admin):** `![Admin Produk](public/img/manajemenproduk.png)`
+* **Laporan Keuangan:** `![Laporan](public/img/laporan-keuangan.png)`
+
+---
+
