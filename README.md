@@ -1,4 +1,4 @@
-# 👜 Creating Leather Craft – E-Commerce System (Fullstack Project)
+# 👜 Creating Leather Craft – E-Commerce System 
 
 **Kerajinan Kulit Asli Garut Handmade**
 
