@@ -204,7 +204,6 @@ http://127.0.0.1:8000
 
 ![Manajemen Produk](public/img/manajemenproduk.png)
 
-<img width="1361" height="616" alt="Manajemen Produk Admin" src="https://github.com/user-attachments/assets/f790d393-8501-40d2-8509-639d71afde10" />
 
 ---
 
@@ -222,11 +221,3 @@ http://127.0.0.1:8000
 
 ---
 
-## 👥 Orang yang Terlibat
-
-* **Sena Marlina** – Mahasiswa / Fullstack Developer
-  (Analisis sistem, UI/UX, pengembangan backend & frontend, database, dan dokumentasi)
-
-* **Dosen Pengampu Mata Kuliah** – Pembimbing Akademik
-
----
