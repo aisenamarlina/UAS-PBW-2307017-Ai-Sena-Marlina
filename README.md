@@ -93,31 +93,17 @@ Proses migrasi database dan manajemen file di dalam VS Code terminal.
 * **Admin Inventory:** CRUD produk lengkap dengan badge indikator stok untuk setiap barang.
 * **Modern UI/UX:** Sidebar responsif dengan navigasi lengkap (Dashboard, Produk, Pesanan, Laporan, Chat, Setting).
 
----
-
 
 ### 📸 Tangkapan Layar Aplikasi
 
 #### 1. Antarmuka Pengguna (User Interface)
+![Tampilan Beranda 1](public/img/tampilan-awaln-1.png)
+![Tampilan Beranda 2](public/img/tampilan-awaln-2.png)
+![Halaman Produk](public/img/halaman-produk-user.png)
+![Keranjang Belanja](public/img/keranjang-belanja.png)
+![Proses Checkout](public/img/halaman-checkout.png)
 
-Halaman utama dan proses belanja pelanggan:
-
-* **Tampilan Beranda 1:** `![Beranda 1](public/img/tampilan-awaln-1.png)`
-* **Tampilan Beranda 2:** `![Beranda 2](public/img/tampilan-awaln-2.png)`
-* **Halaman Produk:** `![Produk](public/img/halaman-produk-user.png)`
-* **Keranjang Belanja:** `![Keranjang](public/img/keranjang-belanja.png)`
-* **Proses Checkout:** `![Checkout](public/img/halaman-checkout.png)`
-* **Detail Pesanan:** `![Detail Pesanan](public/img/halaman-detail-pesanan.png)`
-* **Cek Resi:** `![Cek Resi](public/img/halaman-cek-resi.png)`
-* **Halaman Chat:** `![Chat](public/img/halaman-chat.png)`
-* **Akun User:** `![Akun User](public/img/halaman-akun-user.png)`
-
----
-
-### 🛠️ Bagian Admin / Manajemen (Opsional)
-
-
-* **Manajemen Produk:** `![Manajemen Produk](public/img/manajemenproduk.png)`
-* **Manajemen Pesanan:** `![Manajemen Pesanan](public/img/halaman-manajemen-pemesanan.png)`
-* **Laporan Keuangan:** `![Laporan Keuangan](public/img/laporan-keuangan.png)`
-* **Konfirmasi Pesanan:** `![Konfirmasi](public/img/komfirmasi-pesanan.png)`
+#### 2. Bagian Admin / Manajemen
+![Manajemen Produk](public/img/manajemenproduk.png)
+![Manajemen Pesanan](public/img/halaman-manajemen-pemesanan.png)
+![Laporan Keuangan](public/img/laporan-keuangan.png)
