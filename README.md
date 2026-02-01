@@ -100,18 +100,38 @@ Proses migrasi database dan manajemen file di dalam VS Code terminal.
 ![Tampilan Beranda 1](public/img/tampilan-awaln-1.png)
 ![Tampilan Beranda 2](public/img/tampilan-awaln-2.png)
 
-## 2. Bagian User
-Halaman Katalog
-![Halaman Produk](public/img/halaman-produk-user.png)
-Halaman Keranjang
-![Keranjang Belanja](public/img/keranjang-belanja.png)
-Halaman Checkout
-![Proses Checkout](public/img/halaman-checkout.png)
+## 2. Login - Register
+<img width="1159" height="644" alt="login" src="https://github.com/user-attachments/assets/1f570083-b874-4647-b570-66aba21aa39f" />
+<img width="1222" height="643" alt="registrasi" src="https://github.com/user-attachments/assets/f4dd4965-cf5d-45db-9208-6dc1841136b8" />
 
-#### 2. Bagian Admin / Manajemen
-Manajemen Produk
+
+## 3. Bagian User
+## Dashboard User
+<img width="1366" height="614" alt="halaman-dashboard-user" src="https://github.com/user-attachments/assets/39bf16f6-8b8f-4d20-a070-a4ff193ab937" />
+## Halaman Katalog
+![Halaman Produk](public/img/halaman-produk-user.png)
+## Halaman Keranjang
+![Keranjang Belanja](public/img/keranjang-belanja.png)
+## Halaman Checkout
+![Proses Checkout](public/img/halaman-checkout.png)
+<img width="900" height="521" alt="halaman-checkout-2" src="https://github.com/user-attachments/assets/e10364b8-28ab-48a3-b114-a2493a407548" />
+## Halaman Detail Pesanan
+<img width="732" height="413" alt="halaman-detail-pesanan" src="https://github.com/user-attachments/assets/8b1020b1-6b2a-4ca1-9362-8b7b4f3d9e2b" />
+## Halaman Cek Resi
+<img width="698" height="365" alt="halaman-cek-resi" src="https://github.com/user-attachments/assets/89bc1fd3-f97a-4739-8538-b0b65ac52eb0" />
+
+
+#### 4. Bagian Admin / Manajemen
+## Manajemen Produk
 ![Manajemen Produk](public/img/manajemenproduk.png)
-Manajemen Pemesanan
+## Manajemen Pemesanan
 ![Manajemen Pesanan](public/img/halaman-manajemen-pemesanan.png)
-Laporan Keuangan
+## Laporan Keuangan
 ![Laporan Keuangan](public/img/laporan-keuangan.png)
+## Konfirmasi Pesanan 
+<img width="1366" height="618" alt="komfirmasi-pesanan" src="https://github.com/user-attachments/assets/c5c41272-a1bf-4a58-ac7e-277ead47ee45" />
+## Manajemen Produk
+<img width="1361" height="616" alt="manajemenproduk" src="https://github.com/user-attachments/assets/f790d393-8501-40d2-8509-639d71afde10" />
+
+
+
