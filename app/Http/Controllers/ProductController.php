@@ -123,17 +123,28 @@ class ProductController extends Controller
     // 🔥 TAMBAHAN API (TIDAK MERUBAH KODE LAMA)
     // =========================
 
+    // =========================
+    // 🔥 PERBAIKAN API UNSPLASH
+    // =========================
+
     public function apiProducts(Request $request)
     {
-        $products = Http::get('https://fakestoreapi.com/products')->json();
+        // Ganti 'YOUR_ACCESS_KEY' dengan Access Key dari dashboard Unsplash Developers
+        $accessKey = 'YOUR_ACCESS_KEY_ANDA'; 
+        $searchQuery = $request->input('search', 'leather accessories');
 
-        if ($request->filled('search')) {
-            $products = collect($products)->filter(function ($item) use ($request) {
-                return str_contains(
-                    strtolower($item['title']),
-                    strtolower($request->search)
-                );
-            });
+        $response = Http::get("https://api.unsplash.com/search/photos", [
+            'client_id' => $accessKey,
+            'query'     => $searchQuery,
+            'per_page'  => 12, // Ambil 12 foto
+            'orientation' => 'squarish'
+        ]);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            $products = $data['results']; // Unsplash mengembalikan data di dalam array 'results'
+        } else {
+            $products = [];
         }
 
         return view('products.api', compact('products'));

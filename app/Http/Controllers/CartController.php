@@ -17,7 +17,40 @@ class CartController extends Controller
 
     public function store(Request $request, $id)
     {
-        return $this->add($request, $id);
+        $product = Product::findOrFail($id);
+        $cart = session()->get('cart', []);
+
+        // Ambil foto produk. Sesuaikan 'image' dengan nama kolom di database Anda (misal: 'image' atau 'img')
+        $productImage = $product->image ?? $product->img;
+
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name"     => $product->name,
+                "quantity" => 1,
+                "price"    => $product->price,
+                "image"    => $productImage // Pastikan ini tidak kosong
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        // Logika untuk tombol "Beli Sekarang"
+        if ($request->has('buy_now')) {
+            return redirect()->route('cart.checkout', ['only' => $id]);
+        }
+
+        // Respons untuk AJAX (Penting agar script JavaScript di Blade jalan)
+        if($request->ajax()) {
+            return response()->json([
+                'success' => true, 
+                'message' => 'Produk ditambahkan ke keranjang!',
+                'redirect' => route('cart.checkout', ['only' => $id]) // Tambahan untuk mempermudah JS
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Produk berhasil ditambahkan!');
     }
 
     public function checkout(Request $request)
@@ -28,21 +61,14 @@ class CartController extends Controller
             return redirect()->route('products.index')->with('error', 'Keranjang Anda masih kosong!');
         }
 
-        // Variabel untuk menampung item yang akan ditampilkan di checkout saja
         $filteredCart = [];
-
-        // SKENARIO 1: Dari tombol "Beli Sekarang" (parameter 'only')
         $onlyId = $request->query('only');
-
-        // SKENARIO 2: Dari halaman Keranjang (parameter 'selected_items' dalam format JSON)
         $selectedItems = $request->query('selected_items');
 
         if ($onlyId && isset($allCart[$onlyId])) {
-            // Hanya ambil satu item ini
             $filteredCart = [$onlyId => $allCart[$onlyId]];
         } 
         elseif ($selectedItems) {
-            // Decode JSON ["2", "3"] menjadi array PHP
             $selectedIds = json_decode($selectedItems, true);
             if (is_array($selectedIds)) {
                 foreach ($selectedIds as $id) {
@@ -52,11 +78,9 @@ class CartController extends Controller
                 }
             }
         } else {
-            // Jika tidak ada parameter, default tampilkan semua (atau arahkan balik)
             $filteredCart = $allCart;
         }
         
-        // Kirim $filteredCart ke view sebagai $cart
         return view('cart.checkout', ['cart' => $filteredCart]);
     }
 
@@ -77,8 +101,10 @@ class CartController extends Controller
 
         foreach($request->items as $id => $item) {
             if(isset($cart[$id])) {
-                // Bersihkan format harga (titik/koma)
-                $price = (int) str_replace(['.', ','], '', $cart[$id]['price']);
+                // Bersihkan format harga (Rp 200.000 -> 200000)
+                $rawPrice = $cart[$id]['price'];
+                $price = is_numeric($rawPrice) ? $rawPrice : (int) preg_replace('/[^0-9]/', '', $rawPrice);
+                
                 $total += $price * $item['quantity'];
                 $purchasedIds[] = $id;
             }
@@ -94,7 +120,6 @@ class CartController extends Controller
             'payment_method' => $request->payment_method ?? 'COD',
         ]);
 
-        // Hapus hanya barang yang sudah dibayar dari keranjang session
         foreach($purchasedIds as $id) {
             unset($cart[$id]);
         }
@@ -116,35 +141,5 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
         return redirect()->back()->with('success', 'Produk dihapus!');
-    }
-
-    public function add(Request $request, $id) 
-    {
-        $product = Product::findOrFail($id);
-        $cart = session()->get('cart', []);
-
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->image
-            ];
-        }
-
-        session()->put('cart', $cart);
-
-        // Jika beli sekarang, bawa parameter 'only' agar checkout memfilter item lain
-        if($request->redirect == 'cart') {
-            return redirect()->route('cart.checkout', ['only' => $id]); 
-        }
-
-        if($request->ajax()) {
-            return response()->json(['success' => true]);
-        }
-
-        return back()->with('success', 'Produk ditambahkan!');
     }
 }

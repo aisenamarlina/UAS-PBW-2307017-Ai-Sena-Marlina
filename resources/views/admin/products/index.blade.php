@@ -46,20 +46,22 @@
 
         /* Grid */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.03); transition: 0.3s; }
+        .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.03); transition: 0.3s; display: flex; flex-direction: column; }
         .product-card:hover { transform: translateY(-5px); }
-        .img-box { width: 100%; height: 220px; overflow: hidden; position: relative; }
+        .img-box { width: 100%; height: 220px; overflow: hidden; position: relative; background: #f3f4f6; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
         .badge-stok { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; color: var(--leather-brown); }
-        .info-box { padding: 20px; }
-        .prod-price { color: var(--accent-gold); font-weight: 800; font-size: 1.1rem; }
+        .info-box { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .prod-category { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; font-weight: 700; }
+        .prod-name { font-size: 1.1rem; margin: 5px 0; }
+        .prod-price { color: var(--accent-gold); font-weight: 800; font-size: 1.1rem; margin-bottom: 15px; }
 
-        .action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px solid #f3f4f6; }
+        .action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 1px solid #f3f4f6; }
         .btn-act { padding: 10px; border-radius: 8px; border: none; font-weight: 700; font-size: 0.8rem; cursor: pointer; text-align: center; text-decoration: none; transition: 0.2s; }
         .btn-edit { background: #fffbeb; color: var(--accent-gold); }
         .btn-del { background: #fef2f2; color: #ef4444; }
 
-        /* Modal Perbaikan Upload */
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; backdrop-filter: blur(4px); }
         .modal-content { background: white; padding: 30px; border-radius: 24px; width: 95%; max-width: 550px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
         .modal-header { font-weight: 800; font-size: 1.4rem; margin-bottom: 25px; color: var(--leather-brown); display: flex; justify-content: space-between; align-items: center; }
@@ -129,62 +131,62 @@
     </div>
 
     <aside class="sidebar-custom" id="sidebar">
-    <div class="brand">
-        <img src="{{ asset('img/logo png.png') }}" alt="Logo" class="brand-logo">
-        <span class="menu-text">CREATING LC</span>
-    </div>
+        <div class="brand">
+            <img src="{{ asset('img/logo png.png') }}" alt="Logo" class="brand-logo">
+            <span class="menu-text">CREATING LC</span>
+        </div>
 
-    <nav style="flex:1; padding-top: 10px;">
-        <a href="{{ route('admin.dashboard') }}" class="nav-item-custom {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-            <i class="fas fa-th-large"></i>
-            <span class="menu-text">Dashboard</span>
-        </a>
-        <a href="{{ route('admin.orders') }}" class="nav-item-custom {{ request()->routeIs('admin.orders') ? 'active' : '' }}">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="menu-text">Pemesanan</span>
-        </a>
-        <a href="{{ route('admin.products.index') }}" class="nav-item-custom {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
-            <i class="fas fa-box"></i>
-            <span class="menu-text">Produk</span>
-        </a>
+        <nav style="flex:1; padding-top: 10px;">
+            <a href="{{ route('admin.dashboard') }}" class="nav-item-custom {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <i class="fas fa-th-large"></i>
+                <span class="menu-text">Dashboard</span>
+            </a>
+            <a href="{{ route('admin.orders') }}" class="nav-item-custom {{ request()->routeIs('admin.orders') ? 'active' : '' }}">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="menu-text">Pemesanan</span>
+            </a>
+            <a href="{{ route('admin.products.index') }}" class="nav-item-custom {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
+                <i class="fas fa-box"></i>
+                <span class="menu-text">Produk</span>
+            </a>
 
-        <a href="{{ route('admin.chat.inbox') }}" class="nav-item-custom {{ request()->routeIs('admin.chat.*') ? 'active' : '' }}" style="position: relative;">
-            <i class="fas fa-comments"></i>
-            <span class="menu-text">Pesan Pelanggan</span>
-            
-            @php
-                $unreadCount = \App\Models\Message::where('receiver_id', auth()->id())->where('is_read', false)->count();
-            @endphp
-            
-            @if($unreadCount > 0)
-                <span style="position: absolute; right: 15px; background: #ef4444; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 0.65rem; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 2px solid var(--pure-white);">
-                    {{ $unreadCount }}
-                </span>
-            @endif
-        </a>
+            <a href="{{ route('admin.chat.inbox') }}" class="nav-item-custom {{ request()->routeIs('admin.chat.*') ? 'active' : '' }}" style="position: relative;">
+                <i class="fas fa-comments"></i>
+                <span class="menu-text">Pesan Pelanggan</span>
+                
+                @php
+                    $unreadCount = \App\Models\Message::where('receiver_id', auth()->id())->where('is_read', false)->count();
+                @endphp
+                
+                @if($unreadCount > 0)
+                    <span style="position: absolute; right: 15px; background: #ef4444; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 0.65rem; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 2px solid var(--pure-white);">
+                        {{ $unreadCount }}
+                    </span>
+                @endif
+            </a>
 
-        <a href="{{ route('admin.reports') }}" class="nav-item-custom {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
-            <i class="fas fa-file-invoice-dollar"></i>
-            <span class="menu-text">Laporan Keuangan</span>
-        </a>
+            <a href="{{ route('admin.reports') }}" class="nav-item-custom {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span class="menu-text">Laporan Keuangan</span>
+            </a>
 
-        <a href="{{ route('admin.toko') }}" class="nav-item-custom {{ request()->routeIs('admin.toko') ? 'active' : '' }}">
-            <i class="fas fa-store"></i>
-            <span class="menu-text">Toko</span>
-        </a>
-        <a href="{{ route('admin.settings') }}" class="nav-item-custom {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
-            <i class="fas fa-cog"></i><span class="menu-text">Setting</span>
-        </a>
-    </nav>
+            <a href="{{ route('admin.toko') }}" class="nav-item-custom {{ request()->routeIs('admin.toko') ? 'active' : '' }}">
+                <i class="fas fa-store"></i>
+                <span class="menu-text">Toko</span>
+            </a>
+            <a href="{{ route('admin.settings') }}" class="nav-item-custom {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
+                <i class="fas fa-cog"></i><span class="menu-text">Setting</span>
+            </a>
+        </nav>
 
-    <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
-        @csrf
-        <button type="submit" class="nav-item-custom" style="color:#ef4444; margin-bottom: 25px; border:none; background:none; width:calc(100% - 30px); cursor:pointer; text-align:left;">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="menu-text">Keluar</span>
-        </button>
-    </form>
-</aside>
+        <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+            @csrf
+            <button type="submit" class="nav-item-custom" style="color:#ef4444; margin-bottom: 25px; border:none; background:none; width:calc(100% - 30px); cursor:pointer; text-align:left;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="menu-text">Keluar</span>
+            </button>
+        </form>
+    </aside>
 
     <main class="main-wrapper-custom" id="main-content">
         <div class="header-section">
@@ -196,113 +198,33 @@
         </div>
 
         <div class="grid-container">
-    @foreach($products as $product)
-    <div class="product-card">
-        <div class="img-box">
-            <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}">
-            <span class="badge-stok">STOK: {{ $product->stock ?? 0 }}</span>
-        </div>
-        <div class="info-box">
-            <span class="prod-category">{{ $product->category }}</span>
-            <h3 class="prod-name">{{ $product->name }}</h3>
-            <p class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-            
-            <div class="action-btns">
-                <button onclick="openModal('Edit')" class="btn-act btn-edit">Edit</button>
-                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn-act btn-del" onclick="return confirm('Hapus produk ini?')">Hapus</button>
-                </form>
-            </div>
-
-            <a href="{{ url('/cart/add/' . $product->id) }}" class="btn-add" style="margin-top: 10px; justify-content: center; text-decoration: none;">
-                <i class="fas fa-shopping-cart"></i> Beli Sekarang
-            </a>
-        </div>
-    </div>
-    @endforeach
-</div>
+            @foreach($products as $product)
             <div class="product-card">
                 <div class="img-box">
-                    <img src="https://assets.kompasiana.com/items/album/2025/10/19/dompppet-68f4b2a5ed64152e8c73adf2.jpg?t=o&v=740&x=416">
-                    <span class="badge-stok">STOK: 20</span>
+                    @php
+                        $imagePath = Str::startsWith($product->image, 'http') 
+                            ? $product->image 
+                            : 'https://assets.kompasiana.com/items/album/2025/10/19/' . $product->image;
+                    @endphp
+                    <img src="{{ $imagePath }}" onerror="this.src='{{ asset('img/no-image.png') }}'" alt="{{ $product->name }}">
+                    <span class="badge-stok">STOK: {{ $product->stock ?? 0 }}</span>
                 </div>
                 <div class="info-box">
-                    <span class="prod-category">Dompet</span>
-                    <h3 class="prod-name">Dompet Pria Pendek</h3>
-                    <p class="prod-price">Rp 150.000</p>
+                    <span class="prod-category">{{ $product->category }}</span>
+                    <h3 class="prod-name">{{ $product->name }}</h3>
+                    <p class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                    
                     <div class="action-btns">
                         <button onclick="openModal('Edit')" class="btn-act btn-edit">Edit</button>
-                        <button onclick="confirmDelete()" class="btn-act btn-del">Hapus</button>
+                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-act btn-del" onclick="return confirm('Hapus produk ini?')">Hapus</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <div class="product-card">
-                <div class="img-box">
-                    <img src="https://assets.kompasiana.com/items/album/2025/10/19/id-68f4b2f434777c3d8a5035a2.jpg?t=o&v=740&x=416">
-                    <span class="badge-stok">STOK: 35</span>
-                </div>
-                <div class="info-box">
-                    <span class="prod-category">ID Card</span>
-                    <h3 class="prod-name">ID Card Kulit</h3>
-                    <p class="prod-price">Rp 85.000</p>
-                    <div class="action-btns">
-                        <button onclick="openModal('Edit')" class="btn-act btn-edit">Edit</button>
-                        <button onclick="confirmDelete()" class="btn-act btn-del">Hapus</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="img-box">
-                    <img src="https://assets.kompasiana.com/items/album/2025/10/19/dompettt-68f4b34934777c43a6172872.jpg?t=o&v=740&x=416">
-                    <span class="badge-stok">STOK: 50</span>
-                </div>
-                <div class="info-box">
-                    <span class="prod-category">Aksesoris</span>
-                    <h3 class="prod-name">Gantungan Kunci STNK</h3>
-                    <p class="prod-price">Rp 55.000</p>
-                    <div class="action-btns">
-                        <button onclick="openModal('Edit')" class="btn-act btn-edit">Edit</button>
-                        <button onclick="confirmDelete()" class="btn-act btn-del">Hapus</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="img-box">
-                    <img src="https://assets.kompasiana.com/items/album/2025/10/19/dompetk-68f4b43ec925c47cd01e3082.jpg?t=o&v=740&x=416">
-                    <span class="badge-stok">STOK: 25</span>
-                </div>
-                <div class="info-box">
-                    <span class="prod-category">Dompet</span>
-                    <h3 class="prod-name">Card Holder Unisex</h3>
-                    <p class="prod-price">Rp 120.000</p>
-                    <div class="action-btns">
-                        <button onclick="openModal('Edit')" class="btn-act btn-edit">Edit</button>
-                        <button onclick="confirmDelete()" class="btn-act btn-del">Hapus</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="img-box">
-                    <img src="https://assets.kompasiana.com/items/album/2025/10/19/gantungann-68f4b51dc925c404b611bfc3.jpg?t=o&v=740&x=416">
-                    <span class="badge-stok">STOK: 100</span>
-                </div>
-                <div class="info-box">
-                    <span class="prod-category">Aksesoris</span>
-                    <h3 class="prod-name">Gantungan Kunci</h3>
-                    <p class="prod-price">Rp 35.000</p>
-                    <div class="action-btns">
-                        <button onclick="openModal('Edit')" class="btn-act btn-edit">Edit</button>
-                        <button onclick="confirmDelete()" class="btn-act btn-del">Hapus</button>
-                    </div>
-                </div>
-            </div>
-
+            @endforeach
         </div>
     </main>
 
@@ -311,13 +233,11 @@
         const sidebar = document.getElementById('sidebar');
         const content = document.getElementById('main-content');
 
-        // Sidebar Toggle
         btn.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
             content.classList.toggle('expanded');
         });
 
-        // Preview File Gambar
         function previewFile() {
             const preview = document.getElementById('preview-img');
             const file = document.getElementById('fileInput').files[0];
@@ -337,7 +257,6 @@
             }
         }
 
-        // Modal Controls
         function openModal(type) {
             document.getElementById('modalTitle').innerText = type + " Produk";
             document.getElementById('productModal').style.display = 'flex';
@@ -345,19 +264,14 @@
 
         function closeModal() {
             document.getElementById('productModal').style.display = 'none';
-            // Reset form saat tutup
             document.getElementById('productForm').reset();
             document.getElementById('preview-img').style.display = 'none';
             document.getElementById('placeholder-content').style.display = 'block';
         }
 
         function saveProduct() {
-            alert("Produk dan Foto berhasil disimpan!");
+            alert("Data akan dikirim ke database!");
             closeModal();
-        }
-
-        function confirmDelete() {
-            if(confirm("Hapus produk ini?")) alert("Terhapus!");
         }
 
         window.onclick = function(event) {

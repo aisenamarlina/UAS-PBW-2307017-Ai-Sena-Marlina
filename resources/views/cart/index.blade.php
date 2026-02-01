@@ -53,7 +53,16 @@
         }
 
         .prod-info { display: flex; align-items: center; gap: 15px; }
-        .prod-info img { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; background: #fafafa; }
+        
+        /* PERBAIKAN: Memastikan rasio gambar tetap bagus */
+        .prod-info img { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 12px; 
+            object-fit: contain; 
+            background: #fdfaf7;
+            border: 1px solid #eee;
+        }
         .prod-info h4 { margin: 0; font-size: 1rem; }
 
         .qty-wrapper { 
@@ -129,23 +138,38 @@
             </thead>
             <tbody>
                 @foreach(session('cart') as $id => $details)
-                <tr class="cart-row" data-id="{{ $id }}" data-price="{{ $details['price'] }}">
+                {{-- PERBAIKAN: Sanitasi harga untuk JS agar tidak ada titik/Rp saat di-parse --}}
+                @php 
+                    $cleanPrice = is_numeric($details['price']) ? $details['price'] : (int) preg_replace('/[^0-9]/', '', $details['price']);
+                @endphp
+                
+                <tr class="cart-row" data-id="{{ $id }}" data-price="{{ $cleanPrice }}">
                     <td>
                         <input type="checkbox" class="item-checkbox product-checkbox">
                     </td>
                     <td>
                         <div class="prod-info">
-                            <img src="{{ $details['image'] }}" alt="{{ $details['name'] }}" onerror="this.src='https://via.placeholder.com/80?text=Produk'">
+                            {{-- PERBAIKAN LOGIKA FOTO --}}
+                            @php
+                                $imageUrl = $details['image'];
+                                // Jika image hanya berisi nama file (misal: dompet.jpg), arahkan ke folder assets
+                                if (!Str::startsWith($imageUrl, ['http', 'https'])) {
+                                    $imageUrl = "https://assets.kompasiana.com/items/album/2025/10/19/" . $imageUrl;
+                                }
+                            @endphp
+                            <img src="{{ $imageUrl }}" alt="{{ $details['name'] }}" onerror="this.src='https://via.placeholder.com/80?text=Produk'">
+                            
                             <div>
                                 <h4>{{ $details['name'] }}</h4>
-                                <form action="{{ route('cart.remove', $id) }}" method="POST">
-                                    @csrf @method('DELETE')
+                                <form action="{{ route('cart.remove', $id) }}" method="POST" onsubmit="return confirm('Hapus produk ini?')">
+                                    @csrf 
+                                    @method('DELETE')
                                     <button type="submit" class="remove-link">Hapus</button>
                                 </form>
                             </div>
                         </div>
                     </td>
-                    <td>Rp {{ number_format($details['price'], 0, ',', '.') }}</td>
+                    <td>Rp {{ number_format($cleanPrice, 0, ',', '.') }}</td>
                     <td>
                         <div class="qty-wrapper">
                             <button class="btn-qty minus"><i class="fas fa-minus"></i></button>
@@ -153,7 +177,7 @@
                             <button class="btn-qty plus"><i class="fas fa-plus"></i></button>
                         </div>
                     </td>
-                    <td style="font-weight: 700;">Rp <span class="subtotal-text">{{ number_format($details['price'] * $details['quantity'], 0, ',', '.') }}</span></td>
+                    <td style="font-weight: 700;">Rp <span class="subtotal-text">{{ number_format($cleanPrice * $details['quantity'], 0, ',', '.') }}</span></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -250,10 +274,12 @@
         cb.addEventListener('change', updateGrandTotal);
     });
 
-    checkAll.addEventListener('change', function() {
-        productCheckboxes.forEach(cb => cb.checked = this.checked);
-        updateGrandTotal();
-    });
+    if(checkAll) {
+        checkAll.addEventListener('change', function() {
+            productCheckboxes.forEach(cb => cb.checked = this.checked);
+            updateGrandTotal();
+        });
+    }
 
     updateGrandTotal();
 </script>

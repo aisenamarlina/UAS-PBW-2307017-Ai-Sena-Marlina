@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +29,8 @@
         }
 
         .order-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; }
-        .order-item img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; }
+        /* PERBAIKAN: Foto tetap proporsional */
+        .order-item img { width: 70px; height: 70px; border-radius: 12px; object-fit: contain; background: #fdfaf7; border: 1px solid #eee; }
         .item-info { flex: 1; }
         .item-info h4 { margin: 0; font-size: 1rem; margin-bottom: 8px; }
 
@@ -61,7 +62,6 @@
         .link-item { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .link-item:hover { color: var(--leather-medium); }
 
-        /* Style untuk tombol Dashboard khusus di notifikasi atau navigasi */
         .btn-dashboard { color: var(--leather-medium); font-weight: 700; }
 
         @media (max-width: 850px) { .checkout-container { grid-template-columns: 1fr; } }
@@ -78,7 +78,7 @@
                 <h3><i class="fas fa-map-marker-alt"></i> Alamat Pengiriman</h3>
                 <div class="form-group">
                     <label>Nama Penerima</label>
-                    <input type="text" name="name" value="{{ auth()->user()->name }}" required>
+                    <input type="text" name="name" value="{{ auth()->user()->name ?? '' }}" required>
                 </div>
                 <div class="form-group">
                     <label>Nomor WhatsApp</label>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="form-group">
                     <label>Alamat Lengkap</label>
-                    <textarea name="address" rows="3" required></textarea>
+                    <textarea name="address" rows="3" required placeholder="Contoh: Jl. Merdeka No. 123, Jakarta Selatan"></textarea>
                 </div>
 
                 <h3><i class="fas fa-wallet"></i> Metode Pembayaran</h3>
@@ -105,40 +105,51 @@
                 
                 <div class="order-list">
                     @php 
-                        $total = 0; 
-                        $onlyId = request()->query('only');
-                        $displayItems = ($onlyId && isset($cart[$onlyId])) 
-                                        ? [$onlyId => $cart[$onlyId]] 
-                                        : $cart;
+                        $grandTotal = 0; 
+                        // Mengambil $cart yang sudah difilter oleh Controller (checkout method)
+                        $displayItems = $cart ?? []; 
                     @endphp
 
-                    @foreach($displayItems as $id => $details)
-                    @php $total += $details['price'] * $details['quantity'] @endphp
-                    
-                    <div class="order-item" data-price="{{ $details['price'] }}">
-                        <img src="{{ Str::startsWith($details['image'], ['http://', 'https://']) ? $details['image'] : asset('storage/' . $details['image']) }}" 
-                             onerror="this.src='https://via.placeholder.com/150?text=Produk+Kulit'" 
-                             alt="{{ $details['name'] }}">
+                    @forelse($displayItems as $id => $details)
+                        @php 
+                            // Membersihkan harga agar bisa dikalkulasi
+                            $cleanPrice = is_numeric($details['price']) ? $details['price'] : (int) preg_replace('/[^0-9]/', '', $details['price']);
+                            $subtotal = $cleanPrice * $details['quantity'];
+                            $grandTotal += $subtotal;
+
+                            // Logika Link Gambar
+                            $imageUrl = $details['image'];
+                            if (!Str::startsWith($imageUrl, ['http', 'https'])) {
+                                $imageUrl = "https://assets.kompasiana.com/items/album/2025/10/19/" . $imageUrl;
+                            }
+                        @endphp
                         
-                        <div class="item-info">
-                            <h4>{{ $details['name'] }}</h4>
-                            <div class="quantity-control">
-                                <button type="button" class="btn-qty minus"><i class="fas fa-minus"></i></button>
-                                <input type="text" class="qty-input" name="items[{{ $id }}][quantity]" value="{{ $details['quantity'] }}" readonly>
-                                <button type="button" class="btn-qty plus"><i class="fas fa-plus"></i></button>
-                                <span style="margin-left: auto; font-weight: 700;">
-                                    Rp <span class="subtotal-item">{{ number_format($details['price'] * $details['quantity'], 0, ',', '.') }}</span>
-                                </span>
+                        <div class="order-item" data-price="{{ $cleanPrice }}">
+                            <img src="{{ $imageUrl }}" 
+                                 onerror="this.src='https://via.placeholder.com/150?text=Produk+Kulit'" 
+                                 alt="{{ $details['name'] }}">
+                            
+                            <div class="item-info">
+                                <h4>{{ $details['name'] }}</h4>
+                                <div class="quantity-control">
+                                    <button type="button" class="btn-qty minus"><i class="fas fa-minus"></i></button>
+                                    <input type="text" class="qty-input" name="items[{{ $id }}][quantity]" value="{{ $details['quantity'] }}" readonly>
+                                    <button type="button" class="btn-qty plus"><i class="fas fa-plus"></i></button>
+                                    <span style="margin-left: auto; font-weight: 700;">
+                                        Rp <span class="subtotal-item">{{ number_format($subtotal, 0, ',', '.') }}</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @endforeach
+                    @empty
+                        <p style="text-align: center; color: #888; padding: 20px;">Tidak ada item yang dipilih.</p>
+                    @endforelse
                 </div>
 
                 <div class="summary-details">
                     <div class="summary-row">
                         <span>Subtotal</span>
-                        <span>Rp <span id="grand-subtotal">{{ number_format($total, 0, ',', '.') }}</span></span>
+                        <span>Rp <span id="grand-subtotal">{{ number_format($grandTotal, 0, ',', '.') }}</span></span>
                     </div>
                     <div class="summary-row">
                         <span>Biaya Pengiriman</span>
@@ -146,11 +157,11 @@
                     </div>
                     <div class="total-row">
                         <span>Total</span>
-                        <span>Rp <span id="grand-total">{{ number_format($total, 0, ',', '.') }}</span></span>
+                        <span>Rp <span id="grand-total">{{ number_format($grandTotal, 0, ',', '.') }}</span></span>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-confirm" id="submit-btn">
+                <button type="submit" class="btn-confirm" id="submit-btn" {{ count($displayItems) == 0 ? 'disabled' : '' }}>
                     Konfirmasi Pesanan <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
                 </button>
                 
@@ -161,14 +172,13 @@
                     <a href="{{ route('cart.index') }}" class="link-item">
                         <i class="fas fa-chevron-left"></i> Kembali ke Keranjang
                     </a>
-
                 </div>
             </div>
         </div>
     </form>
 
     <script>
-        // Logika Update Quantity (Tetap sama seperti kode awal Anda)
+        // Update total saat quantity diubah di halaman checkout
         document.querySelectorAll('.btn-qty').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -200,41 +210,28 @@
             document.getElementById('grand-total').innerText = total.toLocaleString('id-ID');
         }
 
-        // --- NOTIFIKASI BERHASIL CHECKOUT ---
+        // SweetAlert untuk Konfirmasi
         const form = document.getElementById('checkout-form');
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Kita simulasi sukses dulu untuk demo visual atau tangkap setelah submit
+            e.preventDefault(); 
             
             Swal.fire({
-                title: 'Pesanan Berhasil!',
-                text: 'Terima kasih! Pesanan Anda sedang kami proses. Poin loyalitas Anda akan segera bertambah.',
-                icon: 'success',
+                title: 'Konfirmasi Pesanan?',
+                text: 'Pastikan alamat dan nomor WhatsApp sudah benar.',
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3e2723',
                 cancelButtonColor: '#8b5e3c',
-                confirmButtonText: '<i class="fas fa-columns"></i> Ke Dashboard',
-                cancelButtonText: 'Tetap di Sini',
+                confirmButtonText: 'Ya, Pesan Sekarang',
+                cancelButtonText: 'Batal',
                 background: '#fcfaf8',
-                color: '#3e2723',
-                backdrop: `rgba(62, 39, 35, 0.4)`
+                color: '#3e2723'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "{{ route('dashboard') }}";
-                } else {
-                    form.submit(); // Lanjutkan proses ke server
+                    form.submit(); 
                 }
             });
         });
-
-        // Tampilkan notifikasi jika ada Session Success dari Laravel
-        @if(session('success'))
-            Swal.fire({
-                title: 'Berhasil!',
-                text: "{{ session('success') }}",
-                icon: 'success',
-                confirmButtonColor: '#3e2723'
-            });
-        @endif
     </script>
 </body>
 </html>

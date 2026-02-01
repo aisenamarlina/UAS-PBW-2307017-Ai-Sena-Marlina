@@ -57,16 +57,20 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
 
-            // Cek role untuk menentukan pesan sukses (opsional)
-            $message = auth()->user()->role == 'admin' ? 'Login Admin Berhasil' : 'Selamat Datang Kembali!';
+            // Ambil user yang baru login
+            $user = Auth::user();
 
-            // Menggunakan intended() agar user kembali ke halaman yang ingin diakses sebelumnya
-            return redirect()->intended(route('dashboard'))->with('success', $message);
+            // Logika pengalihan: Jika admin ke admin.dashboard, jika user ke dashboard
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Selamat Datang Admin!');
+            }
+
+            return redirect()->intended(route('dashboard'))->with('success', 'Selamat Datang Kembali!');
         }
 
         return back()->withErrors([
             'email' => 'Email atau password yang Anda masukkan salah.',
-        ])->onlyInput('email'); // Hanya mengembalikan input email agar user tidak perlu ngetik ulang
+        ])->onlyInput('email');
     }
 
     // Logout
@@ -74,7 +78,7 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        // PENTING: Menghapus session agar benar-benar bersih dan aman
+        // Menghapus session agar benar-benar bersih dan aman
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

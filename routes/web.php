@@ -27,10 +27,6 @@ Route::get('/', function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
-// 🔥 Produk dari Public API (Fake Store API)
-Route::get('/api-products', [ProductController::class, 'apiProducts'])
-    ->name('products.api');
-
 // Authentication
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -52,19 +48,25 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // --- PERBAIKAN BAGIAN PROFIL ---
+    // Menampilkan halaman profil
     Route::get('/profile', [UserController::class, 'index'])->name('user.profile');
+    // Memproses update profil (Gunakan PUT atau POST, di sini kita pakai PUT sesuai standar update)
+    Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
+    // -------------------------------
 
     Route::get('/pesanan-saya', [OrderController::class, 'myOrders'])
         ->name('orders.my_orders');
 
     // Keranjang & Checkout
-    Route::prefix('cart')->name('cart.')->group(function () {
-        Route::get('/', [CartController::class, 'index'])->name('index');
-        Route::post('/add/{id}', [CartController::class, 'store'])->name('add');
-        Route::post('/update/{id}', [CartController::class, 'update'])->name('update');
-        Route::delete('/remove/{id}', [CartController::class, 'destroy'])->name('remove');
-        Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
-        Route::post('/process', [OrderController::class, 'store'])->name('process');
+    Route::prefix('cart')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/add/{id}', [CartController::class, 'store'])->name('cart.add'); 
+        Route::post('/update/{id}', [CartController::class, 'update'])->name('cart.update');
+        Route::delete('/remove/{id}', [CartController::class, 'destroy'])->name('cart.remove');
+        Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+        Route::post('/process', [OrderController::class, 'store'])->name('cart.process');
     });
 
     Route::get('/checkout-success', function () {
@@ -79,10 +81,9 @@ Route::middleware('auth')->group(function () {
     });
 
     // Review
-    Route::post('/reviews', [ReviewController::class, 'store'])
-        ->name('reviews.store');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
-    // Chat (Member & Admin)
+    // Chat
     Route::prefix('chat')->name('chats.')->group(function () {
         Route::get('/{receiver_id}', [ChatController::class, 'index'])->name('index');
         Route::post('/send', [ChatController::class, 'sendMessage'])->name('store');
@@ -100,20 +101,13 @@ Route::middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'adminIndex'])
-        ->name('dashboard');
-
-    // Management Pesanan
+    Route::get('/dashboard', [DashboardController::class, 'adminIndex'])->name('dashboard');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-    Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus'])
-        ->name('orders.updateStatus');
+    Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
-    // Chat Inbox Admin
-    Route::get('/inbox', [ChatController::class, 'adminInbox'])
-        ->name('chat.inbox');
+    Route::get('/inbox', [ChatController::class, 'adminInbox'])->name('chat.inbox');
 
-    // CRUD Produk
     Route::prefix('products')->name('products.')->group(function () {
         Route::get('/', [ProductController::class, 'adminIndex'])->name('index');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
@@ -123,7 +117,6 @@ Route::middleware(['auth', 'admin'])
         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
     });
 
-    // Laporan & Pengaturan
     Route::get('/reports', fn () => view('admin.reports.index'))->name('reports');
     Route::get('/toko', fn () => view('admin.toko'))->name('toko');
     Route::get('/settings', fn () => view('admin.settings'))->name('settings');

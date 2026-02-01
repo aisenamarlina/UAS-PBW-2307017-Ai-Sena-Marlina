@@ -13,15 +13,24 @@ class User extends Authenticatable {
         'name',
         'email',
         'password',
-        'phone', // Penting untuk koordinasi pesanan
+        'phone',
         'address',
         'role', 
-        'loyalty_points', // Sesuai logika OrderController Anda sebelumnya
+        'loyalty_points',
+        // --- TAMBAHKAN KOLOM BERIKUT AGAR BISA DISIMPAN ---
+        'avatar',
+        'birthday',
+        'bio',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'birthday' => 'date', // Otomatis mengubah string tgl menjadi objek Carbon
     ];
 
     /**
@@ -32,7 +41,7 @@ class User extends Authenticatable {
     }
 
     /**
-     * Relasi Chat (Penting untuk adminInbox di ChatController)
+     * Relasi Chat
      */
     public function sentMessages() {
         return $this->hasMany(Message::class, 'sender_id');
@@ -49,7 +58,6 @@ class User extends Authenticatable {
         return $this->hasMany(Wishlist::class); 
     }
 
-    // Jika user juga bisa jadi penjual (Seller)
     public function products() { 
         return $this->hasMany(Product::class, 'seller_id'); 
     }

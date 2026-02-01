@@ -55,7 +55,6 @@
         </a>
         
         <div style="display: flex; align-items: center; gap: 24px;">
-            <a href="{{ route('products.index') }}" class="nav-link">Daftar Produk</a>
 
             {{-- MENU PESAN (CHAT) --}}
             @auth

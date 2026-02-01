@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->role == 'admin') {
-            // Mengarahkan ke method adminIndex
+            // Mengarahkan ke method adminIndex melalui route admin.dashboard
             return redirect()->route('admin.dashboard');
         }
 
@@ -31,7 +31,6 @@ class DashboardController extends Controller
 
     /**
      * Method ini yang dipanggil oleh Route /admin/dashboard
-     * Pastikan namanya 'adminIndex' sesuai pesan error tadi
      */
     public function adminIndex()
     {
@@ -61,6 +60,8 @@ class DashboardController extends Controller
             $cartCount = \App\Models\Cart::where('user_id', $user->id)->count();
         }
 
+        // PERBAIKAN: Diubah dari 'dashboard' menjadi 'user.dashboard' 
+        // agar sesuai dengan folder resources/views/user/dashboard.blade.php
         return view('user.dashboard', compact('orders', 'cartCount'));
     }
 }

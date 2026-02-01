@@ -192,7 +192,12 @@
             <span class="menu-text">Pesan Pelanggan</span>
             
             @php
-                $unreadCount = \App\Models\Message::where('receiver_id', auth()->id())->where('is_read', false)->count();
+                // Perbaikan: Tambahkan pengecekan kolom is_read agar tidak error
+                $hasIsReadColumn = \Illuminate\Support\Facades\Schema::hasColumn('messages', 'is_read');
+                $unreadCount = 0;
+                if($hasIsReadColumn) {
+                    $unreadCount = \App\Models\Message::where('receiver_id', auth()->id())->where('is_read', false)->count();
+                }
             @endphp
             
             @if($unreadCount > 0)
@@ -273,10 +278,10 @@
                 <div class="transaction-item">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <div style="width: 45px; height: 45px; background: #f8fafc; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #94a3b8;">
-                            {{ substr($transaction->customer_name, 0, 1) }}
+                            {{ substr($transaction->customer_name ?? 'C', 0, 1) }}
                         </div>
                         <div>
-                            <span style="font-weight: 700; color: var(--text-dark);">{{ $transaction->customer_name }}</span><br>
+                            <span style="font-weight: 700; color: var(--text-dark);">{{ $transaction->customer_name ?? 'Pelanggan' }}</span><br>
                             <small style="color: #94a3b8; font-weight: 500;">{{ $transaction->created_at->diffForHumans() }} • {{ $transaction->payment_method }}</small>
                         </div>
                     </div>

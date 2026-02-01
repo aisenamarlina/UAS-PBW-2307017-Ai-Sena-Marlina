@@ -81,59 +81,22 @@
         .product-info h3 { font-size: 1.1rem; color: var(--leather-dark); margin-bottom: 8px; font-weight: 700; }
         .price { color: var(--leather-medium); font-weight: 800; display: block; margin-bottom: 20px; font-size: 1.2rem; }
         
-        /* Button Group - REFINED & ELEGANT */
-        .btn-group { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            width: 100%;
-        }
-        .ajax-cart-form { display: block; }
+        /* Button Group */
+        .btn-group { display: flex; align-items: center; gap: 12px; width: 100%; }
         .btn-cart { 
-            background: #f8f5f2; 
-            color: var(--leather-dark); 
-            border: 1.5px solid #efeae6; 
-            width: 50px; 
-            height: 50px; 
-            border-radius: 14px; 
-            cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
+            background: #f8f5f2; color: var(--leather-dark); border: 1.5px solid #efeae6; 
+            width: 48px; height: 48px; border-radius: 12px; cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
         }
-        .btn-cart:hover { 
-            background: var(--leather-light); 
-            color: white; 
-            border-color: var(--leather-light);
-            transform: rotate(-10deg);
-        }
+        .btn-cart:hover { background: var(--leather-light); color: white; border-color: var(--leather-light); transform: rotate(-10deg); }
 
         .btn-detail { 
-            flex: 1; 
-            height: 50px; 
-            background: linear-gradient(135deg, var(--leather-dark), #5d4037); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 14px; 
-            font-weight: 700; 
-            border: none; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            flex: 1; height: 48px; background: linear-gradient(135deg, var(--leather-dark), #5d4037); 
+            color: white; text-decoration: none; border-radius: 12px; font-weight: 700; 
+            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; 
+            gap: 8px; transition: all 0.3s ease; font-size: 0.85rem; letter-spacing: 0.5px; text-transform: uppercase;
         }
-        .btn-detail:hover { 
-            background: linear-gradient(135deg, #5d4037, var(--leather-dark)); 
-            box-shadow: 0 8px 20px rgba(62, 39, 35, 0.25); 
-            transform: translateY(-2px);
-        }
+        .btn-detail:hover { background: linear-gradient(135deg, #5d4037, var(--leather-dark)); box-shadow: 0 8px 20px rgba(62, 39, 35, 0.25); transform: translateY(-2px); }
 
         /* Notification Toast */
         .toast-notif {
@@ -166,31 +129,27 @@
     </div>
 
     <nav style="flex:1; padding-top: 10px;">
-        <a href="/dashboard" class="nav-item-custom ">
+        <a href="/dashboard" class="nav-item-custom">
             <i class="fas fa-columns"></i>
             <span class="menu-text">Dashboard</span>
         </a>
-        
         <a href="{{ route('products.index') }}" class="nav-item-custom active">
             <i class="fas fa-th-large"></i>
             <span class="menu-text">Katalog</span>
         </a>
-
-        
         <a href="{{ route('cart.index') }}" class="nav-item-custom">
             <i class="fas fa-shopping-cart"></i>
             <span class="menu-text">Keranjang</span>
         </a>
-        
         <a href="{{ route('chats.index', ['receiver_id' => 1]) }}" class="nav-item-custom">
             <i class="fas fa-comment-dots"></i>
             <span class="menu-text">Pesan Chat</span>
         </a>
         <a href="{{ route('orders.my_orders') }}" class="nav-item-custom">
-    <i class="fas fa-truck-loading"></i>
-    <span class="menu-text">Pesanan Saya</span>
-</a>
-<a href="{{ route('user.profile') }}" class="nav-item-custom">
+            <i class="fas fa-truck-loading"></i>
+            <span class="menu-text">Pesanan Saya</span>
+        </a>
+        <a href="{{ route('user.profile') }}" class="nav-item-custom">
             <i class="fas fa-user-circle"></i>
             <span class="menu-text">Akun Saya</span>
         </a>
@@ -198,7 +157,6 @@
             <i class="fas fa-home"></i>
             <span class="menu-text">Beranda</span>
         </a>
-
     </nav>
 
     <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
@@ -208,6 +166,7 @@
         </button>
     </form>
 </aside>
+
 <main class="main-wrapper-custom" id="main-content">
     <nav class="navbar">
         <button id="toggle-btn" class="toggle-btn"><i class="fas fa-bars"></i></button>
@@ -233,57 +192,46 @@
             <a href="#" class="category-tab">Aksesoris</a>
         </div>
 
-        <div class="product-grid">
-    @php
-        $products = [
-            ['id' => 1, 'name' => 'Dompet Panjang Pria', 'price' => '200.000', 'img' => 'dompetp-68f4b246ed64152b57732dd2.jpg', 'tag' => 'Laris'],
-            ['id' => 2, 'name' => 'Dompet Pria Pendek', 'price' => '150.000', 'img' => 'dompppet-68f4b2a5ed64152e8c73adf2.jpg', 'tag' => 'Baru'],
-            ['id' => 3, 'name' => 'ID Card Kulit', 'price' => '85.000', 'img' => 'id-68f4b2f434777c3d8a5035a2.jpg', 'tag' => 'Premium'],
-            ['id' => 4, 'name' => 'Gantungan Kunci STNK', 'price' => '55.000', 'img' => 'dompettt-68f4b34934777c43a6172872.jpg', 'tag' => 'Kulit Asli'],
-            ['id' => 5, 'name' => 'Card Holder Unisex', 'price' => '120.000', 'img' => 'dompetk-68f4b43ec925c47cd01e3082.jpg', 'tag' => 'Terpopuler'],
-            ['id' => 6, 'name' => 'Gantungan Kunci', 'price' => '35.000', 'img' => 'gantungann-68f4b51dc925c404b611bfc3.jpg', 'tag' => 'Handmade'],
-        ];
-    @endphp
+        <div class="product-grid" id="main-product-grid">
+            @php
+                $products = [
+                    ['id' => 1, 'name' => 'Dompet Panjang Pria', 'price' => '200.000', 'img' => 'dompetp-68f4b246ed64152b57732dd2.jpg?t=o&v=770', 'tag' => 'Laris'],
+                    ['id' => 2, 'name' => 'Dompet Pendek Pria', 'price' => '125.000', 'img' => 'dompppet-68f4b2a5ed64152e8c73adf2.jpg?t=o&v=770', 'tag' => 'Baru'],
+                    ['id' => 3, 'name' => 'ID Card Kulit', 'price' => '100.000', 'img' => 'id-68f4b2f434777c3d8a5035a2.jpg?t=o&v=770', 'tag' => 'Premium'],
+                    ['id' => 4, 'name' => 'Gantungan Kunci & STNK', 'price' => '125.000', 'img' => 'dompettt-68f4b34934777c43a6172872.jpg?t=o&v=770', 'tag' => 'Best Seller'],
+                    ['id' => 5, 'name' => 'Tempat Kartu / Card Holder', 'price' => '80.000', 'img' => 'dompetk-68f4b43ec925c47cd01e3082.jpg?t=o&v=770', 'tag' => 'Terpopuler'],
+                    ['id' => 6, 'name' => 'Gantungan Kunci', 'price' => '50.000', 'img' => 'gantungann-68f4b51dc925c404b611bfc3.jpg?t=o&v=740&x=416', 'tag' => 'Handmade'],
+                ];
+            @endphp
 
-    @foreach($products as $p)
-    <div class="product-card" style="border: 1px solid #e5e7eb; border-radius: 20px; overflow: hidden; background: white;">
-        <div style="position: absolute; top: 15px; left: 15px; background: #8b5e3c; color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; z-index: 2; text-transform: uppercase;">
-            {{ $p['tag'] }}
-        </div>
-
-        <div class="product-img-wrapper" style="background: #fdfaf7; display: flex; align-items: center; justify-content: center; padding: 25px; height: 280px;">
-            <img src="https://assets.kompasiana.com/items/album/2025/10/19/{{ $p['img'] }}?t=o&v=740&x=416" 
-                 class="product-img" 
-                 alt="{{ $p['name'] }}"
-                 style="width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s;">
-        </div>
-        
-        <div class="product-info" style="text-align: left; padding: 20px;">
-            <p style="font-size: 0.7rem; color: #b08d57; margin-bottom: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Genuine Leather</p>
-            <h3 style="font-size: 1.1rem; color: #3e2723; margin-bottom: 10px; font-weight: 800;">{{ $p['name'] }}</h3>
-            <span class="price" style="color: #5d4037; font-size: 1.25rem; font-weight: 800; display: block; margin-bottom: 20px;">Rp {{ $p['price'] }}</span>
-            
-            <div class="btn-group" style="display: flex; gap: 8px; align-items: stretch;">
-                <form class="ajax-cart-form" action="{{ route('cart.add', $p['id']) }}" method="POST" style="margin: 0;">
-                    @csrf
-                    <button type="submit" class="btn-cart" title="Tambah ke Keranjang" 
-                        style="background: #efebe9; color: #5d4037; border: none; width: 48px; height: 48px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s;">
-                        <i class="fas fa-shopping-basket" style="font-size: 1.1rem;"></i>
-                    </button>
-                </form>
-                
-                <form action="{{ route('cart.add', $p['id']) }}" method="POST" style="flex:1; margin: 0;">
-                    @csrf
-                    <button type="submit" class="btn-detail" 
-                        style="background: #5d4037; color: white; border: none; width: 100%; height: 48px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                        <i class="fas fa-bolt"></i> Beli Sekarang
-                    </button>
-                </form>
+            @foreach($products as $p)
+            <div class="product-card">
+                <div style="position: absolute; top: 15px; left: 15px; background: #8b5e3c; color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; z-index: 2; text-transform: uppercase;">
+                    {{ $p['tag'] }}
+                </div>
+                <div class="product-img-wrapper" style="background: #fdfaf7; display: flex; align-items: center; justify-content: center; padding: 25px;">
+                    <img src="https://assets.kompasiana.com/items/album/2025/10/19/{{ $p['img'] }}" 
+                         class="product-img" alt="{{ $p['name'] }}" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="product-info" style="text-align: left; padding: 20px;">
+                    <p style="font-size: 0.7rem; color: #b08d57; margin-bottom: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Genuine Leather</p>
+                    <h3 style="font-size: 1.1rem; color: #3e2723; margin-bottom: 10px; font-weight: 800;">{{ $p['name'] }}</h3>
+                    <span class="price">Rp {{ $p['price'] }}</span>
+                    <div class="btn-group">
+                        <form action="{{ route('cart.add', $p['id']) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn-cart" title="Tambah ke Keranjang"><i class="fas fa-shopping-basket"></i></button>
+                        </form>
+                        
+                        <form action="{{ route('cart.add', $p['id']) }}" method="POST" class="buy-now-form" style="flex:1;">
+                            @csrf
+                            <button type="submit" class="btn-detail"><i class="fas fa-bolt"></i> Beli Sekarang</button>
+                        </form>
+                    </div>
+                </div>
             </div>
+            @endforeach
         </div>
-    </div>
-    @endforeach
-</div>
     </div>
 </main>
 
@@ -292,41 +240,54 @@
         const btn = document.getElementById('toggle-btn');
         const sidebar = document.getElementById('sidebar');
         const main = document.getElementById('main-content');
+        const toast = document.getElementById('toast');
 
-        // Sidebar Toggle
+        // Sidebar logic
         btn.addEventListener('click', function () {
             if (window.innerWidth <= 768) {
                 sidebar.classList.toggle('show');
-                return;
+            } else {
+                sidebar.classList.toggle('collapsed');
+                main.classList.toggle('expanded');
             }
-            sidebar.classList.toggle('collapsed');
-            main.classList.toggle('expanded');
         });
 
-        // AJAX Cart Submission
-        const forms = document.querySelectorAll('.ajax-cart-form');
-        const toast = document.getElementById('toast');
+        function showToast(message) {
+            toast.querySelector('span').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
 
-        forms.forEach(form => {
+        // Logic AJAX
+        const allForms = document.querySelectorAll('form[action*="cart/add"]');
+        
+        allForms.forEach(form => {
             form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const url = this.action;
-                const formData = new FormData(this);
+                e.preventDefault(); 
+                
+                const token = this.querySelector('input[name="_token"]').value;
+                const isBuyNow = this.classList.contains('buy-now-form');
 
-                fetch(url, {
+                fetch(this.action, {
                     method: 'POST',
-                    body: formData,
-                    headers: { 
+                    body: new FormData(this),
+                    headers: {
                         'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        'X-CSRF-TOKEN': token
                     }
                 })
                 .then(response => {
-                    toast.classList.add('show');
-                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                    // Cek jika response sukses (biasanya 200)
+                    if (isBuyNow) {
+                        // PERBAIKAN DI SINI: Menggunakan 'cart.checkout' sesuai web.php Anda
+                        window.location.href = "{{ route('cart.checkout') }}"; 
+                    } else {
+                        showToast("Produk berhasil masuk keranjang!");
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    showToast("Terjadi kesalahan, coba lagi.");
                 });
             });
         });

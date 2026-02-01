@@ -229,9 +229,7 @@
             <span>The Art of Leathercraft</span>
             <h1>Eksplorasi Kemewahan<br>Kulit Asli Garut</h1>
             <p>Mendefinisikan kemewahan lewat kerajinan tangan. Produk kulit asli premium dari Garut, dirancang untuk melengkapi gaya hidup modern Anda.</p>
-            <div>
-                <a href="{{ route('products.index') }}" class="btn-dark">Eksplorasi Koleksi</a>
-            </div>
+            
         </div>
         
         <div class="hero-logo-wrapper">
