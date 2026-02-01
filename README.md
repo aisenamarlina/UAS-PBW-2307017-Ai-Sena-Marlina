@@ -99,11 +99,19 @@ Proses migrasi database dan manajemen file di dalam VS Code terminal.
 #### 1. Antarmuka Pengguna (User Interface)
 ![Tampilan Beranda 1](public/img/tampilan-awaln-1.png)
 ![Tampilan Beranda 2](public/img/tampilan-awaln-2.png)
+
+## 2. Bagian User
+Halaman Katalog
 ![Halaman Produk](public/img/halaman-produk-user.png)
+Halaman Keranjang
 ![Keranjang Belanja](public/img/keranjang-belanja.png)
+Halaman Checkout
 ![Proses Checkout](public/img/halaman-checkout.png)
 
 #### 2. Bagian Admin / Manajemen
+Manajemen Produk
 ![Manajemen Produk](public/img/manajemenproduk.png)
+Manajemen Pemesanan
 ![Manajemen Pesanan](public/img/halaman-manajemen-pemesanan.png)
+Laporan Keuangan
 ![Laporan Keuangan](public/img/laporan-keuangan.png)
